@@ -1,0 +1,132 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\MISA.Amis.API\\MISA.Amis.DL\\MISA.Amis.DL.csproj": {}
+  },
+  "projects": {
+    "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj",
+        "projectName": "MISA.Amis.Common",
+        "projectPath": "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj",
+        "packagesPath": "C:\\Users\\HO VAN ANH\\.nuget\\packages\\",
+        "outputPath": "E:\\MISA.Amis.API\\MISA.Amis.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HO VAN ANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\MISA.Amis.API\\MISA.Amis.DL\\MISA.Amis.DL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\MISA.Amis.API\\MISA.Amis.DL\\MISA.Amis.DL.csproj",
+        "projectName": "MISA.Amis.DL",
+        "projectPath": "E:\\MISA.Amis.API\\MISA.Amis.DL\\MISA.Amis.DL.csproj",
+        "packagesPath": "C:\\Users\\HO VAN ANH\\.nuget\\packages\\",
+        "outputPath": "E:\\MISA.Amis.API\\MISA.Amis.DL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HO VAN ANH\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj": {
+                "projectPath": "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.123, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

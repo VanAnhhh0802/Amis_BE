@@ -1,0 +1,14 @@
+E:\MISA.Amis.API\MISA.Amis.Common\bin\Debug\net6.0\MISA.Amis.Common.deps.json
+E:\MISA.Amis.API\MISA.Amis.Common\bin\Debug\net6.0\MISA.Amis.Common.dll
+E:\MISA.Amis.API\MISA.Amis.Common\bin\Debug\net6.0\MISA.Amis.Common.pdb
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.csproj.AssemblyReference.cache
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.Resource.resources
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.csproj.GenerateResource.cache
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.AssemblyInfoInputs.cache
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.AssemblyInfo.cs
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.csproj.CoreCompileInputs.cache
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.dll
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\refint\MISA.Amis.Common.dll
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\MISA.Amis.Common.pdb
+E:\MISA.Amis.API\MISA.Amis.Common\obj\Debug\net6.0\ref\MISA.Amis.Common.dll
