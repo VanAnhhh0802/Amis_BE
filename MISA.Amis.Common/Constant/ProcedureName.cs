@@ -37,5 +37,17 @@ namespace MISA.Amis.Common.Constant
         ///  ProcedureName Lấy ra chi tiết 1 bản ghi theo id
         /// </summary>
         public static string GetById = "Proc_{0}_GetById";
+
+        /// <summary>
+        /// Procudure kiểm tra mã trùng
+        /// </summary>
+        public static string CheckDuplicateCode = "Proc_{0}_CheckDuplicateCode";
+
+        /// <summary>
+        /// Procudure xuất khẩu
+        /// </summary>
+        public static string Export = "Proc_{0}_Export";
+
+        public static string DeleteMany = "Proc_{0}_DeleteMany";
     }
 }

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Amis.Common", "MISA.Am
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0A73A472-E2E1-46FD-BCCE-7E18C820CF25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.Amis.BL.UnitTest", "MISA.Amis.BL.UnitTest\MISA.Amis.BL.UnitTest.csproj", "{2C93B7FC-58E7-433D-82D7-372A2675D8FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Amis.BL.UnitTest", "MISA.Amis.BL.UnitTest\MISA.Amis.BL.UnitTest.csproj", "{2C93B7FC-58E7-433D-82D7-372A2675D8FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

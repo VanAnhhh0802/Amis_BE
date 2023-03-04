@@ -34,51 +34,7 @@ namespace MISA.Amis.API.Controllers
         #endregion
         
         #region Methods
-        /// <summary>
-        /// API lấy nhân viên theo bộ lọc và phân trang
-        /// </summary>
-        /// <param name="keyword">Từ khóa</param>
-        /// <param name="departmentId">ID của đơn vị</param>
-        /// <param name="pageSize">Số bản ghi muốn lấy</param>
-        /// <param name="pageNumber">Vị trí bản ghi hiện tại</param>
-        /// <returns>Đối tượng IActionResult bao gồm:
-        /// -Tổng số bản ghi thỏa mãn điều kiện
-        /// -Danh sách nhân viên trên 1 trang
-        /// -Số trang hiền thị thỏa mãn điều kiện
-        /// </returns>
-        /// Created By: Văn Anh (17/1/2023)
-        [HttpGet("filter")]
-        public IActionResult GetEmployeesFilter(
-                    [FromQuery] string? keyword,
-                    [FromQuery] Guid? departmentId,
-                    [FromQuery] int pageSize,
-                    [FromQuery] int pageNumber
-                    )
-        {
-            try
-            {
-                var data = _employeeBL.GetEmployeeFilter().Read<Employee>().ToList();
-                int totalRecords = _employeeBL.GetEmployeeFilter().ReadFirstOrDefault<int>();
-                // Xử lý kết quả trả về
-                return StatusCode(StatusCodes.Status200OK, new PagingResult
-                {
-                    Data = data,
-                    totalRecord = totalRecords,
-                    totalPage = totalRecords / pageSize
-                });
-            }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
-                {
-                    ErrorCode = Common.Enums.ErrorCode.Exception,
-                    DevMsg = ex.Message,
-                    UserMsg = Common.Resource.UserMsg_Exception,
-                });
-            }
-        }
+        
         /// <summary>
         /// API Sinh mã nhân viên mới   
         /// </summary>
@@ -109,16 +65,33 @@ namespace MISA.Amis.API.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
-                {
-                    ErrorCode = Common.Enums.ErrorCode.Exception,
-                    DevMsg = ex.Message,
-                    UserMsg = Common.Resource.UserMsg_Exception,
-                });
+                return HandleException(ex);
             }
             //}
             #endregion
+        }
+
+        [HttpPost("export")]
+        public IActionResult Export([FromBody] string keyword) 
+        {
+            try
+            {
+                var memoryStrean = _employeeBL.ExportEmployee(keyword);
+
+                try
+                {
+                    return File(memoryStrean.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Danh sách nhân viên.xlsx");
+                }
+                finally 
+                {
+
+                    memoryStrean.Dispose();
+                }
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
         }
     }
 }

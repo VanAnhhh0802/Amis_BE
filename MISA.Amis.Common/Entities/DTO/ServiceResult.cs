@@ -22,12 +22,14 @@ namespace MISA.Amis.Common.Entities.DTO
         /// <summary>
         /// Đối tượng lỗi trả về
         /// </summary>
-        public object? Data { get; set; }
+        public dynamic? Data { get; set; }
 
         /// <summary>
         /// Massage mô tả lỗi
         /// </summary>
         public string? Message { get; set; }
+        
+        public int numberOfAffectedRows { get; set; }
 
     }
 }

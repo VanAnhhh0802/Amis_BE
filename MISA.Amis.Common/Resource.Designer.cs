@@ -61,11 +61,38 @@ namespace MISA.Amis.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bản ghi cần xóa không tồn tại trong hệ thống.
+        /// </summary>
+        public static string DeleteNotExit {
+            get {
+                return ResourceManager.GetString("DeleteNotExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phòng ban không hợp lệ. Vui lòng chọn lại!.
+        /// </summary>
+        public static string DepartmentInvalid {
+            get {
+                return ResourceManager.GetString("DepartmentInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gọi Procedure trong database thất bại!.
         /// </summary>
         public static string DevMsg_Deleted {
             get {
                 return ResourceManager.GetString("DevMsg_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kết nối tới DL thất bại.
+        /// </summary>
+        public static string DevMsg_DeleteManyFailed {
+            get {
+                return ResourceManager.GetString("DevMsg_DeleteManyFailed", resourceCulture);
             }
         }
         
@@ -115,11 +142,38 @@ namespace MISA.Amis.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên tồn tại trong hệ thống vui lòng kiểm tra lại..
+        /// </summary>
+        public static string DuplicateEmployeeCode {
+            get {
+                return ResourceManager.GetString("DuplicateEmployeeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dữ liệu đầu vào không hợp lệ!.
         /// </summary>
         public static string EmptyValue {
             get {
                 return ResourceManager.GetString("EmptyValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nữ.
+        /// </summary>
+        public static string FeMale {
+            get {
+                return ResourceManager.GetString("FeMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nam.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
             }
         }
         
@@ -142,11 +196,128 @@ namespace MISA.Amis.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Khác.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chi nhánh ngân hàng không quá 255 ký tự.
+        /// </summary>
+        public static string OutLengthBankBranch {
+            get {
+                return ResourceManager.GetString("OutLengthBankBranch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên ngân hàng không quá 255 ký tự.
+        /// </summary>
+        public static string OutLengthBankName {
+            get {
+                return ResourceManager.GetString("OutLengthBankName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số TK ngân hàng độ dài không quá 100 ký tự.
+        /// </summary>
+        public static string OutLengthBankNumber {
+            get {
+                return ResourceManager.GetString("OutLengthBankNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số chứng minh nhân dân không quá 50 ký tự.
+        /// </summary>
+        public static string OutLengthIndentityNumber {
+            get {
+                return ResourceManager.GetString("OutLengthIndentityNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nơi cấp không quá 255 ký tự.
+        /// </summary>
+        public static string OutLengthIndentityPlace {
+            get {
+                return ResourceManager.GetString("OutLengthIndentityPlace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điên thoại di động không quá 50 ký tự.
+        /// </summary>
+        public static string OutLengthPhoneNumber {
+            get {
+                return ResourceManager.GetString("OutLengthPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số điện thoại cố định không quá 50 ký tự.
+        /// </summary>
+        public static string OutLengthTelephoneNumber {
+            get {
+                return ResourceManager.GetString("OutLengthTelephoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bản ghi cần sửa không tồn tại.
+        /// </summary>
+        public static string UpdateNotExit {
+            get {
+                return ResourceManager.GetString("UpdateNotExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên không đúng định dạng!.
+        /// </summary>
+        public static string UserMsg_CodeError {
+            get {
+                return ResourceManager.GetString("UserMsg_CodeError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày không được lớn hơn ngày hiện tại.
+        /// </summary>
+        public static string UserMsg_DateValid {
+            get {
+                return ResourceManager.GetString("UserMsg_DateValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Xóa thất bại, vui lòng thử lại.
         /// </summary>
         public static string UserMsg_Deleted {
             get {
                 return ResourceManager.GetString("UserMsg_Deleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Có lỗi xảy ra vui lòng liên hệ MISA.
+        /// </summary>
+        public static string UserMsg_DeleteFailed {
+            get {
+                return ResourceManager.GetString("UserMsg_DeleteFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email không đúng định dạng!.
+        /// </summary>
+        public static string UserMsg_EmailInValid {
+            get {
+                return ResourceManager.GetString("UserMsg_EmailInValid", resourceCulture);
             }
         }
         
@@ -183,6 +354,51 @@ namespace MISA.Amis.Common {
         public static string UserMsg_InsertFailed {
             get {
                 return ResourceManager.GetString("UserMsg_InsertFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Địa chỉ độ dài không quá 255 ký tự.
+        /// </summary>
+        public static string UserMsg_OutLengthAddress {
+            get {
+                return ResourceManager.GetString("UserMsg_OutLengthAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số tài khoản ngân hàng không quá 50 ký tự.
+        /// </summary>
+        public static string UserMsg_OutLengthBankAccountNumber {
+            get {
+                return ResourceManager.GetString("UserMsg_OutLengthBankAccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Độ dài Email không quá 50 ký tự.
+        /// </summary>
+        public static string UserMsg_OutLengthEmail {
+            get {
+                return ResourceManager.GetString("UserMsg_OutLengthEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên độ dài không quá 20 ký tự.
+        /// </summary>
+        public static string UserMsg_OutLengthEmployeeCode {
+            get {
+                return ResourceManager.GetString("UserMsg_OutLengthEmployeeCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tên nhân viên độ dài không quá 100 ký tự.
+        /// </summary>
+        public static string UserMsg_OutLengthEmployeeName {
+            get {
+                return ResourceManager.GetString("UserMsg_OutLengthEmployeeName", resourceCulture);
             }
         }
         

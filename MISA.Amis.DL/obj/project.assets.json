@@ -28,9 +28,21 @@
           }
         }
       },
+      "ServiceStack.Interfaces/6.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        }
+      },
       "MISA.Amis.Common/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "ServiceStack.Interfaces": "6.6.0"
+        },
         "compile": {
           "bin/placeholder/MISA.Amis.Common.dll": {}
         },
@@ -84,6 +96,20 @@
         "logo.png",
         "mysqlconnector.2.2.5.nupkg.sha512",
         "mysqlconnector.nuspec"
+      ]
+    },
+    "ServiceStack.Interfaces/6.6.0": {
+      "sha512": "ZxldJsRWb8dSJwb6f6PrJuSu69e8HrmIKkYxYq8JLZSZwezRcmXwcSKdlZTruV0ZSszLtE/30TFaTlBRHnzNqw==",
+      "type": "package",
+      "path": "servicestack.interfaces/6.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/ServiceStack.Interfaces.dll",
+        "lib/net6.0/ServiceStack.Interfaces.dll",
+        "lib/netstandard2.0/ServiceStack.Interfaces.dll",
+        "servicestack.interfaces.6.6.0.nupkg.sha512",
+        "servicestack.interfaces.nuspec"
       ]
     },
     "MISA.Amis.Common/1.0.0": {

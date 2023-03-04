@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BaseBL\BaseBL.cs~RFf25e45b.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspose.Cells" Version="23.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MISA.Amis.Common\MISA.Amis.Common.csproj" />
     <ProjectReference Include="..\MISA.Amis.DL\MISA.Amis.DL.csproj" />
   </ItemGroup>

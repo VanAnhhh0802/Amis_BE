@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DeleteNotExit" xml:space="preserve">
+    <value>Bản ghi cần xóa không tồn tại trong hệ thống</value>
+  </data>
+  <data name="DepartmentInvalid" xml:space="preserve">
+    <value>Phòng ban không hợp lệ. Vui lòng chọn lại!</value>
+  </data>
   <data name="DevMsg_Deleted" xml:space="preserve">
     <value>Gọi Procedure trong database thất bại!</value>
+  </data>
+  <data name="DevMsg_DeleteManyFailed" xml:space="preserve">
+    <value>Kết nối tới DL thất bại</value>
   </data>
   <data name="DevMsg_Exception" xml:space="preserve">
     <value>Kết nối với database thất bại</value>
@@ -135,8 +144,17 @@
   <data name="DevMsg_Updated" xml:space="preserve">
     <value>Gọi Procedure trong database thất bại!</value>
   </data>
+  <data name="DuplicateEmployeeCode" xml:space="preserve">
+    <value>Mã nhân viên tồn tại trong hệ thống vui lòng kiểm tra lại.</value>
+  </data>
   <data name="EmptyValue" xml:space="preserve">
     <value>Dữ liệu đầu vào không hợp lệ!</value>
+  </data>
+  <data name="FeMale" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Nam</value>
   </data>
   <data name="Message_InsertDLError" xml:space="preserve">
     <value>Lỗi thêm mới khi kết nối đến DL</value>
@@ -144,8 +162,47 @@
   <data name="Message_UpdateDLError" xml:space="preserve">
     <value>Lỗi sửa khi kết nối tới DL</value>
   </data>
+  <data name="Other" xml:space="preserve">
+    <value>Khác</value>
+  </data>
+  <data name="OutLengthBankBranch" xml:space="preserve">
+    <value>Chi nhánh ngân hàng không quá 255 ký tự</value>
+  </data>
+  <data name="OutLengthBankName" xml:space="preserve">
+    <value>Tên ngân hàng không quá 255 ký tự</value>
+  </data>
+  <data name="OutLengthBankNumber" xml:space="preserve">
+    <value>Số TK ngân hàng độ dài không quá 100 ký tự</value>
+  </data>
+  <data name="OutLengthIndentityNumber" xml:space="preserve">
+    <value>Số chứng minh nhân dân không quá 50 ký tự</value>
+  </data>
+  <data name="OutLengthIndentityPlace" xml:space="preserve">
+    <value>Nơi cấp không quá 255 ký tự</value>
+  </data>
+  <data name="OutLengthPhoneNumber" xml:space="preserve">
+    <value>Số điên thoại di động không quá 50 ký tự</value>
+  </data>
+  <data name="OutLengthTelephoneNumber" xml:space="preserve">
+    <value>Số điện thoại cố định không quá 50 ký tự</value>
+  </data>
+  <data name="UpdateNotExit" xml:space="preserve">
+    <value>Bản ghi cần sửa không tồn tại</value>
+  </data>
+  <data name="UserMsg_CodeError" xml:space="preserve">
+    <value>Mã nhân viên không đúng định dạng!</value>
+  </data>
+  <data name="UserMsg_DateValid" xml:space="preserve">
+    <value>Ngày không được lớn hơn ngày hiện tại</value>
+  </data>
   <data name="UserMsg_Deleted" xml:space="preserve">
     <value>Xóa thất bại, vui lòng thử lại</value>
+  </data>
+  <data name="UserMsg_DeleteFailed" xml:space="preserve">
+    <value>Có lỗi xảy ra vui lòng liên hệ MISA</value>
+  </data>
+  <data name="UserMsg_EmailInValid" xml:space="preserve">
+    <value>Email không đúng định dạng!</value>
   </data>
   <data name="UserMsg_Exception" xml:space="preserve">
     <value>Có lỗi xảy ra! Vui lòng thử lại!</value>
@@ -158,6 +215,21 @@
   </data>
   <data name="UserMsg_InsertFailed" xml:space="preserve">
     <value>Thêm mới thất bại, vui lòng thử lại!</value>
+  </data>
+  <data name="UserMsg_OutLengthAddress" xml:space="preserve">
+    <value>Địa chỉ độ dài không quá 255 ký tự</value>
+  </data>
+  <data name="UserMsg_OutLengthBankAccountNumber" xml:space="preserve">
+    <value>Số tài khoản ngân hàng không quá 50 ký tự</value>
+  </data>
+  <data name="UserMsg_OutLengthEmail" xml:space="preserve">
+    <value>Độ dài Email không quá 50 ký tự</value>
+  </data>
+  <data name="UserMsg_OutLengthEmployeeCode" xml:space="preserve">
+    <value>Mã nhân viên độ dài không quá 20 ký tự</value>
+  </data>
+  <data name="UserMsg_OutLengthEmployeeName" xml:space="preserve">
+    <value>Tên nhân viên độ dài không quá 100 ký tự</value>
   </data>
   <data name="UserMsg_Updated" xml:space="preserve">
     <value>Sửa thất bại, vui lòng thử lại!</value>

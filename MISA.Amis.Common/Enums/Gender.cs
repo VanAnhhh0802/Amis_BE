@@ -18,6 +18,6 @@
         /// <summary>
         /// Giới tính khác
         /// </summary>
-        Orther=2
+        Other=2,
     }
 }

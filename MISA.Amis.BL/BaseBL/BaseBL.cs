@@ -1,13 +1,18 @@
-﻿using MISA.Amis.Common;
+﻿using Microsoft.AspNetCore.Http;
+using MISA.Amis.Common;
+using MISA.Amis.Common.CustomAttribute;
 using MISA.Amis.Common.Entities.DTO;
 using MISA.Amis.Common.Enums;
 using MISA.Amis.DL;
 using MISA.Amis.DL.BaseDL;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -16,63 +21,62 @@ namespace MISA.Amis.BL.BaseBL
     public class BaseBL<T> : IBaseBL<T>
     {
         #region Field
-
         private IBaseDL<T> _baseDL;
-
+        protected List<string> listErrorRequired = new List<string>();
+        protected ServiceResult resultValidateCustom = new ServiceResult();
         #endregion
 
         #region Constructor
-
         public BaseBL(IBaseDL<T> baseDL)
         {
             _baseDL = baseDL;
         }
-
         #endregion
+
+        #region Methods
+
         /// <summary>
-        /// Hàm thêm mới nhân viên
+        /// Phân trang theo danh sách record
         /// </summary>
-        /// <param name="employee">Đối tượng nhân viên cần thêm mới</param>
+        /// <param name="pageSize">Số lượng bản ghi trên 1 trang thỏa mãn điều kiện</param>
+        /// <param name="pageNumber">Trang hiện tại</param>
+        /// <param name="keyword">Tìm theo mã, tên, số điện thoại </param>
+        /// <param name="departmentId">id của phòng ban</param>
+        /// <param name="positionId">id của Chức vụ</param>
+        /// <returns>Danh sách record và số lượng bản ghi theo điều kiện</returns>
+        /// Created by: VĂn Anh (6/2/2023)
+        public PagingResult<T> GetRecordFilter(string keyword, Guid? departmentId, Guid? positionId, int pageSize, int pageNumber)
+        {
+            return _baseDL.GetRecordFilter(keyword, departmentId, positionId, pageSize, pageNumber);
+        }
+
+        /// <summary>
+        /// Hàm thêm mới record
+        /// </summary>
+        /// <param name="record">Đối tượng record cần thêm mới</param>
         /// <returns>
         /// Số bản ghi bị thay đổi
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
         public ServiceResult Insert(T record)
         {
+            var newId = Guid.NewGuid();
             //Validate đầu vào
-            var validateErrorResults = ValidateRequestData(record);
+            var validateErrorResults = ValidateRequestData(record, newId);
 
-            if (validateErrorResults.Count > 0)
+
+            if (!validateErrorResults.IsSuccess)
             {
-                return new ServiceResult
-                {
-                    IsSuccess = false,
-                    ErrorCode = Common.Enums.ErrorCode.EmptyValue,
-                    Data = validateErrorResults,
-                    Message = Resource.EmptyValue
-                };
+                return validateErrorResults;
             }
-
-            var numberOfAffectedRows = _baseDL.InsertRecord(record);
+            var resultDL = _baseDL.InsertRecord(record, newId);
             // Xử lý kết quả trả về
 
-            if (numberOfAffectedRows > 0)
+            return new ServiceResult
             {
-                return new ServiceResult
-                {
-                    IsSuccess = true,
-                };
-            }
-            else
-            {
-                return new ServiceResult
-                {
-                    IsSuccess = false,
-                    ErrorCode = Common.Enums.ErrorCode.InsertFailed,
-                    Message = Resource.Message_InsertDLError
-                };
-
-            }
+                IsSuccess = true,
+                numberOfAffectedRows = resultDL,
+            };
         }
 
         /// <summary>
@@ -80,15 +84,11 @@ namespace MISA.Amis.BL.BaseBL
         /// </summary>
         /// <param name="record"></param>
         /// <returns>List lỗi</returns>
-        protected virtual List<string> ValidateRequestData(T? record)
+        protected virtual ServiceResult ValidateRequestData(T? record, Guid id)
         {
-            //Validate đầu vào
-            var result = ValidateCustom(record);
-            //Khởi tạo danh sách lỗi
-            List<string> listError = new List<string>();
+            //Validate đầu vào cho những trường bắt buộc
 
-
-            //Lấy ra danh sách các thuộc tính trong lớp Employee
+            //Lấy ra danh sách các thuộc tính trong lớp record
             var properties = typeof(T).GetProperties();
             //Duyệt qua các phần tử trong properties
             foreach (var property in properties)
@@ -97,21 +97,41 @@ namespace MISA.Amis.BL.BaseBL
                 var propertyValue = property.GetValue(record);
                 //Trường hợp property có value là Required
                 var requiredAttribute = (RequiredAttribute)property.GetCustomAttributes(typeof(RequiredAttribute), false).FirstOrDefault();
-                if (requiredAttribute != null && string.IsNullOrEmpty(propertyValue.ToString()))
+                if (requiredAttribute != null && (string.IsNullOrEmpty(propertyValue.ToString()) || propertyValue.ToString() == "00000000-0000-0000-0000-000000000000"))
                 {
-                    listError.Add(requiredAttribute.ErrorMessage);
+                    listErrorRequired.Add(propertyName);
+                }
+                if (listErrorRequired.Count > 0)
+                {
+                    return new ServiceResult
+                    {
+                        IsSuccess = false,
+                        ErrorCode = Common.Enums.ErrorCode.EmptyValue,
+                        Data = listErrorRequired,
+                    };
                 }
 
             }
-            if (result.Count > 0)
+            resultValidateCustom = ValidateCustom(record);
+
+
+            if (resultValidateCustom.IsSuccess)
             {
-                for (int i = 0; i <= result.Count - 1; i++)
-                {
-                    listError.Add(result[i]);
-
-                }
+                resultValidateCustom = ValidateCustom(record);
             }
-            return listError;
+
+            if (!resultValidateCustom.IsSuccess)
+            {
+                return resultValidateCustom;
+            }
+            else
+            {
+
+                return new ServiceResult
+                {
+                    IsSuccess = true,
+                };
+            }
         }
 
         /// <summary>
@@ -119,74 +139,39 @@ namespace MISA.Amis.BL.BaseBL
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        protected virtual List<string> ValidateCustom(T? record)
+        protected virtual ServiceResult ValidateCustom(T? record)
         {
-            List<string> listErrorCustom = new List<string>();
-            // Trường hợp Email không đúng định dạng
-            var properties = typeof(T).GetProperties();
-            //Duyệt qua các phần tử trong properties
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(record);
-                var emailAttribute = (EmailAddressAttribute)(property.GetCustomAttributes(typeof(EmailAddressAttribute), false)).FirstOrDefault();
-                if (emailAttribute != null && propertyValue != null)
-                {
-                    var regexEmail = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
-                    if (!Regex.IsMatch(propertyValue.ToString(), regexEmail))
-                    {
-                        listErrorCustom.Add(emailAttribute.ErrorMessage);
-                    }
-                }
-            }
-            return listErrorCustom;
+            return new ServiceResult { };
         }
 
+
         /// <summary>
-        /// Hàm sửa nhân viên
+        /// Hàm sửa record
         /// </summary>
-        /// <param name="record">Đối tượng nhân viên cần sửa</param>
+        /// <param name="record">Đối tượng record cần sửa</param>
         /// <returns>        
         /// Số bản ghi bị thay đổi
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        public ServiceResult Update(T record)
+        public virtual ServiceResult Update(T record, Guid id)
         {
             //Validate đầu vào
-            //Validate đầu vào
-            var validateErrorResults = ValidateRequestData(record);
+            var validateErrorResults = ValidateRequestData(record, id);
 
-            if (validateErrorResults.Count > 0)
+            if (!validateErrorResults.IsSuccess)
             {
-                return new ServiceResult
-                {
-                    IsSuccess = false,
-                    ErrorCode = Common.Enums.ErrorCode.EmptyValue,
-                    Data = validateErrorResults,
-                    Message = Resource.EmptyValue
-                };
+                return validateErrorResults;
             }
 
-            var numberOfAffectedRows = _baseDL.UpdateRecord(record);
+            var resultDL = _baseDL.UpdateRecord(id, record);
             // Xử lý kết quả trả về
-            if (numberOfAffectedRows > 0)
+            return new ServiceResult
             {
-                return new ServiceResult
-                {
-                    IsSuccess = true,
-                };
-            }
-            else
-            {
-                return new ServiceResult
-                {
-                    IsSuccess = false,
-                    ErrorCode = Common.Enums.ErrorCode.UpdateFailed,
-                    Message = Resource.Message_UpdateDLError
-                };
-
-            }
+                IsSuccess = true,
+                numberOfAffectedRows = resultDL
+            };
         }
+
 
         /// <summary>
         /// Hàm xóa record
@@ -205,6 +190,38 @@ namespace MISA.Amis.BL.BaseBL
         }
 
         /// <summary>
+        /// xóa nhiều bản ghi cùng 1 lúc 
+        /// </summary>
+        /// <param name="recordIds">Mảng id record cần xóa dưới dạnh chuỗi JSON</param>
+        /// <returns>
+        /// 200: Xóa thành công
+        /// 500: Xóa thất bại
+        /// </returns>
+        public ServiceResult DeleteMany(Guid[] recordIds)
+        {
+            var jsonIds = JsonConvert.SerializeObject(recordIds);
+            var result = _baseDL.DeleteMany(jsonIds);
+
+            if (result > 0)
+            {
+                return new ServiceResult
+                {
+                    IsSuccess = true,
+                    Data = result
+                };
+            }
+            else
+            {
+                return new ServiceResult
+                {
+                    IsSuccess = false,
+                    ErrorCode = ErrorCode.DeleteManyError
+                };
+            }
+
+        }
+
+        /// <summary>
         /// Hàm hiển thị thông tin record
         /// </summary>
         /// <param name="recordId">Id record cần hiển thị</param>
@@ -216,5 +233,23 @@ namespace MISA.Amis.BL.BaseBL
         {
             return _baseDL.GetRecordById(recordId);
         }
+
+        /// Hàm check mã record bị trùng
+        /// </summary>
+        /// <param name="recordCode">record</param>
+        /// <returns>true - mã record bị trùng, false - mã record không bị trùng</returns>
+        public bool CheckDuplicate(T record, string employeeCode, Guid id)
+        {
+            var result = _baseDL.CheckDuplicate(record, employeeCode, id);
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        #endregion
+
     }
 }

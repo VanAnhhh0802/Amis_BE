@@ -1,11 +1,38 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "ServiceStack.Interfaces/6.6.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/ServiceStack.Interfaces.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "ServiceStack.Interfaces/6.6.0": {
+      "sha512": "ZxldJsRWb8dSJwb6f6PrJuSu69e8HrmIKkYxYq8JLZSZwezRcmXwcSKdlZTruV0ZSszLtE/30TFaTlBRHnzNqw==",
+      "type": "package",
+      "path": "servicestack.interfaces/6.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net472/ServiceStack.Interfaces.dll",
+        "lib/net6.0/ServiceStack.Interfaces.dll",
+        "lib/netstandard2.0/ServiceStack.Interfaces.dll",
+        "servicestack.interfaces.6.6.0.nupkg.sha512",
+        "servicestack.interfaces.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "ServiceStack.Interfaces >= 6.6.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\HO VAN ANH\\.nuget\\packages\\": {}
@@ -45,6 +72,12 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
+        "dependencies": {
+          "ServiceStack.Interfaces": {
+            "target": "Package",
+            "version": "[6.6.0, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

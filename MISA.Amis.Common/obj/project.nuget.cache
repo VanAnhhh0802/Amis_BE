@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "20rsCynr9LHXXWQHNk2+DnFxBgm/Bwxx60NxBjgKOassHwnJI+mce9asmVBXHGFwA2CAVXXHT/M4nXDrXWjuaw==",
+  "dgSpecHash": "LOKzuJz7ZY/52R4ZA8WON0vAuLhA87rTR1YaveZ9o9LDd2MSKnpp3XCOOj/0enToWb946Wj/y9cKHU0m3lrSvQ==",
   "success": true,
   "projectFilePath": "E:\\MISA.Amis.API\\MISA.Amis.Common\\MISA.Amis.Common.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\HO VAN ANH\\.nuget\\packages\\servicestack.interfaces\\6.6.0\\servicestack.interfaces.6.6.0.nupkg.sha512"
+  ],
   "logs": []
 }

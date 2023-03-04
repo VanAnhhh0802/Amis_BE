@@ -19,7 +19,7 @@ using static Dapper.SqlMapper;
 
 namespace MISA.Amis.DL.EmployeeDL
 {
-    public class EmployeeDL: BaseDL<Employee>, IEmployeeDL
+    public class EmployeeDL : BaseDL<Employee>, IEmployeeDL
     {
         public EmployeeDL(IDatabaseConnection databaseConnection) : base(databaseConnection)
         {
@@ -55,39 +55,28 @@ namespace MISA.Amis.DL.EmployeeDL
         }
 
         /// <summary>
-        /// Phân trang theo danh sách nhân viên
+        /// Hàm xuất danh sách nhân viên thành file excel
         /// </summary>
-        /// <param name="pageSize">Số lượng bản ghi trên 1 trang thỏa mãn điều kiện</param>
-        /// <param name="pageNumber">Trang hiện tại</param>
-        /// <param name="employeeFilter">Tìm theo mã, tên, số điện thoại </param>
-        /// <param name="departmentId">id của phòng ban</param>
-        /// <returns>Danh sách nhân viên và số lượng bản ghi</returns>
-        /// Created by: VĂn Anh (6/2/2023)
-        public GridReader GetEmployeeFilter(int pageSize = 10, int pageNumber = 1, string? employeeFilter = "", Guid? departmentId = null)
+        /// <param name="keyword">từ khóa tìm kiếm</param>
+        /// <returns>File danh sách nhân viên</returns>
+        /// Creatd By: Văn Anh (17/2/2023)
+        public List<Employee> ExportEmployee(string keyword)
         {
-            string storedProcedureName = String.Format(ProcedureName.GetFilter, typeof(Employee).Name);
+            string storedProcedureName = String.Format(ProcedureName.Export, typeof(Employee).Name);
 
             var parameters = new DynamicParameters();
-            parameters.Add("p_PageNumber", pageNumber);
-            parameters.Add("p_PageSize", pageSize);
-            parameters.Add("p_DepartmentId", departmentId);
-            parameters.Add("p_EmployeeFilter", employeeFilter);
-            // Chuẩn bị tham số đầu vào cho stored
-            //Khởi tạo kết nốt tới DB
-            dynamic multy;
+            parameters.Add("p_keyword", keyword);
 
+            //Khởi tạo kết nốt tới DB
+            var  result = new List<Employee>();
             using (var mySqlConnection = DatabaseConnection.ConnectDatabase())
             {
-                mySqlConnection.Open();
-
-                //Lấy kêt quả theo result
-                //Gọi vào Db
-                 multy = mySqlConnection.QueryMultiple(
-                   storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+                result = mySqlConnection.Query<Employee>(
+                   storedProcedureName,
+                   parameters,
+                   commandType: System.Data.CommandType.StoredProcedure).ToList();
             }
-            // Xử lý kết quả trả về
-
-            return multy;
+            return result;
         }
     }
 }

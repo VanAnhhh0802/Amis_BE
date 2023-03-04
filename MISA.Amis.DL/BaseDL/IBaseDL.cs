@@ -1,4 +1,5 @@
 ﻿using MISA.Amis.Common.Entities;
+using MISA.Amis.Common.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,17 @@ namespace MISA.Amis.DL.BaseDL
     public interface IBaseDL<T>
     {
         /// <summary>
+        /// Phân trang theo danh sách nhân viên
+        /// </summary>
+        /// <param name="pageSize">Số lượng bản ghi trên 1 trang thỏa mãn điều kiện</param>
+        /// <param name="pageNumber">Trang hiện tại</param>
+        /// <param name="employeeFilter">Tìm theo mã, tên, số điện thoại </param>
+        /// <param name="departmentId">id của phòng ban</param>
+        /// <returns>Danh sách nhân viên và số lượng bản ghi</returns>
+        /// Created by: VĂn Anh (6/2/2023)
+        PagingResult<T> GetRecordFilter (string keyword, Guid? departmentId, Guid? positionId, int pageSize, int pageNumber);
+
+        /// <summary>
         /// Hàm thêm mới 1 bản ghi 
         /// </summary>
         /// <param name="record">Bản ghi 1 thêm</param>
@@ -19,7 +31,7 @@ namespace MISA.Amis.DL.BaseDL
         /// 500: insert thất bại
         /// </returns>
         /// created by: Văn Anh (8/2/2023)
-        int InsertRecord(T record);
+        int InsertRecord(T record, Guid newId);
         /// <summary>
         /// Hàm sửa record
         /// </summary>
@@ -29,7 +41,7 @@ namespace MISA.Amis.DL.BaseDL
         /// -500: sửa thất bại
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        int UpdateRecord(T record);
+        int UpdateRecord(Guid id, T record);
 
         /// <summary>
         /// Hàm xóa record
@@ -43,6 +55,16 @@ namespace MISA.Amis.DL.BaseDL
         int DeleteRecord(Guid recordId);
 
         /// <summary>
+        /// xóa nhiều bản ghi cùng 1 lúc 
+        /// </summary>
+        /// <param name="recordIds">Mảng id record cần xóa dưới dạnh chuỗi JSON</param>
+        /// <returns>
+        /// 200: Xóa thành công
+        /// 500: Xóa thất bại
+        /// </returns>
+        int DeleteMany(string recordIds);
+
+        /// <summary>
         /// Hàm hiển thị thông tin record theo id
         /// </summary>
         /// <param name="recordId">Id của đối tượng record cần hiển thị</param>
@@ -51,5 +73,13 @@ namespace MISA.Amis.DL.BaseDL
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
         T GetRecordById(Guid id);
+
+        /// <summary>
+        /// Hàm check mã record bị trùng
+        /// </summary>
+        /// <param name="recordCode">Mã record</param>
+        /// <param name="id">id record</param>
+        /// <returns>true - mã record bị trùng, false - mã record không bị trùng</returns>
+        public int CheckDuplicate(T record, string recordCode, Guid id);
     }
 }
