@@ -97,7 +97,8 @@ namespace MISA.Amis.BL.BaseBL
                 var propertyValue = property.GetValue(record);
                 //Trường hợp property có value là Required
                 var requiredAttribute = (RequiredAttribute)property.GetCustomAttributes(typeof(RequiredAttribute), false).FirstOrDefault();
-                if (requiredAttribute != null && (string.IsNullOrEmpty(propertyValue.ToString()) || propertyValue.ToString() == "00000000-0000-0000-0000-000000000000"))
+                if (requiredAttribute != null && (string.IsNullOrEmpty(propertyValue.ToString()) 
+                    || propertyValue.ToString() == "00000000-0000-0000-0000-000000000000"))
                 {
                     listErrorRequired.Add(propertyName);
                 }

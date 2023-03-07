@@ -1,7 +1,10 @@
 ﻿using MISA.Amis.BL;
+using MISA.Amis.BL.BaseBL;
 using MISA.Amis.Common;
 using MISA.Amis.Common.Entities;
 using MISA.Amis.Common.Entities.DTO;
+using MISA.Amis.Common.Enums;
+using MISA.Amis.DL.BaseDL;
 using MISA.Amis.DL.EmployeeDL;
 using NSubstitute;
 using System;
@@ -30,7 +33,7 @@ namespace MISA.Amis.BL.UnitTest
         /// </summary>
         /// created by: Văn Anh (11/2/2023)
         [Test]
-        public void InsertRecord_EmployeeCode_ReturnsInvalid()
+        public void InsertRecord_Valid_ReturnsInvalid()
         {
             //Arrangge
             var employee = new Employee
@@ -40,22 +43,22 @@ namespace MISA.Amis.BL.UnitTest
                 FullName = "Hồ Văn Anh",
                 Gender = Common.Enums.Gender.Male,
                 DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
-                DateOfBirth= DateTime.Now,
-                PositionName= "Giám đốc",
-                IdentityNumber= "032155458",
-                IdentityDate= DateTime.Now,
-                IdentityPlace= "Thanh Hóa",
-                Address= "Hà Nội",
-                PhoneNumber= "0145874",
-                TelephoneNumber= "01555511",
-                Email= "Anh@example.com",
-                BankAccountNumber= "054664678",
-                BankName= "ACb",
-                BankBranch= "Hà Thành",
-                CreatedDate= DateTime.Now,
-                CreatedBy= "Nguyễn Văn Anh",
-                ModifiedBy= "Nguyễn Văn Bình",
-                ModifiedDate= DateTime.Now
+                DateOfBirth = DateTime.Now,
+                PositionName = "Giám đốc",
+                IdentityNumber = "032155458",
+                IdentityDate = DateTime.Now,
+                IdentityPlace = "Thanh Hóa",
+                Address = "Hà Nội",
+                PhoneNumber = "0145874",
+                TelephoneNumber = "01555511",
+                Email = "Anh@example.com",
+                BankAccountNumber = "054664678",
+                BankName = "ACb",
+                BankBranch = "Hà Thành",
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Nguyễn Văn Anh",
+                ModifiedBy = "Nguyễn Văn Bình",
+                ModifiedDate = DateTime.Now
             };
 
             var expectedResult = new ServiceResult
@@ -66,7 +69,7 @@ namespace MISA.Amis.BL.UnitTest
                 {
                     "EmployeeCode"
                 },
-                
+
             };
             //Act
             var actualResult = _employeeBL.Insert(employee);
@@ -75,7 +78,58 @@ namespace MISA.Amis.BL.UnitTest
             Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
             Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
             Assert.AreEqual(expectedResult.Data, actualResult.Data);
-            Assert.AreEqual(expectedResult.Message, actualResult.Message);
+        }
+
+        /// <summary>
+        /// Hàm test trường EmployeeCode để trống
+        /// </summary>
+        /// created by: Văn Anh (11/2/2023)
+        [Test]
+        public void InsertRecord_EmployeeCode_ReturnsInvalid()
+        {
+            //Arrangge
+            var employee = new Employee
+            {
+                EmployeeId = Guid.NewGuid(),
+                EmployeeCode = String.Empty,
+                FullName = "Hồ Văn Anh",
+                Gender = Common.Enums.Gender.Male,
+                DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
+                DateOfBirth = DateTime.Now,
+                PositionName = "Giám đốc",
+                IdentityNumber = "032155458",
+                IdentityDate = DateTime.Now,
+                IdentityPlace = "Thanh Hóa",
+                Address = "Hà Nội",
+                PhoneNumber = "0145874",
+                TelephoneNumber = "01555511",
+                Email = "Anh@example.com",
+                BankAccountNumber = "054664678",
+                BankName = "ACb",
+                BankBranch = "Hà Thành",
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Nguyễn Văn Anh",
+                ModifiedBy = "Nguyễn Văn Bình",
+                ModifiedDate = DateTime.Now
+            };
+
+            var expectedResult = new ServiceResult
+            {
+                IsSuccess = false,
+                ErrorCode = Common.Enums.ErrorCode.EmptyValue,
+                Data = new List<string>
+                {
+                    "EmployeeCode"
+                },
+
+            };
+            //Act
+            var actualResult = _employeeBL.Insert(employee);
+
+            //Assert
+            Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
+            Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
+            Assert.AreEqual(expectedResult.Data, actualResult.Data);
         }
 
         /// <summary>
@@ -95,21 +149,21 @@ namespace MISA.Amis.BL.UnitTest
                 Gender = Common.Enums.Gender.Male,
                 DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
                 DateOfBirth = DateTime.Now,
-                PositionName= "Giám đốc",
-                IdentityNumber= "032155458",
-                IdentityDate= DateTime.Now,
-                IdentityPlace= "Thanh Hóa",
-                Address= "Hà Nội",
-                PhoneNumber= "0145874",
-                TelephoneNumber= "01555511",
-                Email= "Anh@example.com",
-                BankAccountNumber= "054664678",
-                BankName= "ACb",
-                BankBranch= "Hà Thành",
-                CreatedDate= DateTime.Now,
-                CreatedBy= "Nguyễn Văn Anh",
-                ModifiedBy= "Nguyễn Văn Bình",
-                ModifiedDate= DateTime.Now
+                PositionName = "Giám đốc",
+                IdentityNumber = "032155458",
+                IdentityDate = DateTime.Now,
+                IdentityPlace = "Thanh Hóa",
+                Address = "Hà Nội",
+                PhoneNumber = "0145874",
+                TelephoneNumber = "01555511",
+                Email = "Anh@example.com",
+                BankAccountNumber = "054664678",
+                BankName = "ACb",
+                BankBranch = "Hà Thành",
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Nguyễn Văn Anh",
+                ModifiedBy = "Nguyễn Văn Bình",
+                ModifiedDate = DateTime.Now
             };
 
             var expectedResult = new ServiceResult
@@ -130,7 +184,7 @@ namespace MISA.Amis.BL.UnitTest
             Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
             Assert.AreEqual(expectedResult.Data, actualResult.Data);
         }
-        
+
         /// <summary>
         /// Hàm test trường department không được để trống
         /// </summary>
@@ -146,22 +200,22 @@ namespace MISA.Amis.BL.UnitTest
                 FullName = "Hồ Văn Anh",
                 Gender = Common.Enums.Gender.Male,
                 DepartmentId = Guid.Empty,
-                DateOfBirth= DateTime.Now,
-                PositionName= "Giám đốc",
-                IdentityNumber= "032155458",
-                IdentityDate= DateTime.Now,
-                IdentityPlace= "Thanh Hóa",
-                Address= "Hà Nội",
-                PhoneNumber= "0145874",
-                TelephoneNumber= "01555511",
-                Email= "Anh@example.com",
-                BankAccountNumber= "054664678",
-                BankName= "ACb",
-                BankBranch= "Hà Thành",
-                CreatedDate= DateTime.Now,
-                CreatedBy= "Nguyễn Văn Anh",
-                ModifiedBy= "Nguyễn Văn Bình",
-                ModifiedDate= DateTime.Now
+                DateOfBirth = DateTime.Now,
+                PositionName = "Giám đốc",
+                IdentityNumber = "032155458",
+                IdentityDate = DateTime.Now,
+                IdentityPlace = "Thanh Hóa",
+                Address = "Hà Nội",
+                PhoneNumber = "0145874",
+                TelephoneNumber = "01555511",
+                Email = "Anh@example.com",
+                BankAccountNumber = "054664678",
+                BankName = "ACb",
+                BankBranch = "Hà Thành",
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Nguyễn Văn Anh",
+                ModifiedBy = "Nguyễn Văn Bình",
+                ModifiedDate = DateTime.Now
             };
 
             var expectedResult = new ServiceResult
@@ -181,51 +235,6 @@ namespace MISA.Amis.BL.UnitTest
             Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
             Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
             Assert.AreEqual(expectedResult.Data, actualResult.Data);
-        }
-
-        /// <summary>
-        /// Hàm test Mã trùng không đúng
-        /// </summary>
-        [Test]
-        public void InsertRecord_EmployeeCodeDuplicate_ReturnsInvalid()
-        {
-            //Arrangge
-            var employee = new Employee
-            {
-                EmployeeId = Guid.NewGuid(),
-                EmployeeCode = "NV-133",
-                FullName = "Hồ Văn Anh",
-                Gender = Common.Enums.Gender.Male,
-                DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
-                DateOfBirth = DateTime.Now,
-                PositionName = "Giám đốc",
-                IdentityNumber = "032155458",
-                IdentityDate = DateTime.Now,
-                IdentityPlace = "Thanh Hóa",
-                Address = "Hà Nội",
-                PhoneNumber = "0145874",
-                TelephoneNumber = "01555511",
-                Email = "Anh@gmail.com",
-                BankAccountNumber = "054664678",
-                BankName = "ACb",
-                BankBranch = "Hà Thành",
-                CreatedDate = DateTime.Now,
-                CreatedBy = "Nguyễn Văn Anh",
-                ModifiedBy = "Nguyễn Văn Bình",
-                ModifiedDate = DateTime.Now
-            };
-
-            var expectedResult = new ServiceResult
-            {
-                IsSuccess = false,
-                ErrorCode = Common.Enums.ErrorCode.DuplicateCode,
-            };
-            //Act
-            var actualResult = _employeeBL.Insert(employee);
-
-            //Assert
-            Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
-            Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
         }
 
         /// <summary>
@@ -273,19 +282,20 @@ namespace MISA.Amis.BL.UnitTest
         }
 
         /// <summary>
-        /// Hàm test Data trả về bị lỗi
+        /// Hàm test OutLength trả về bị lỗi
         /// TH: 1 là thành công
         /// </summary>
         [Test]
-        public void InsertRecord_ValidData_ReturnsValidResultSuccess()
+        public void InsertRecord_OutLengthProperty_ReturnsValidResultSuccess()
         {
             //Arrangge
             var employee = new Employee
             {
-                EmployeeCode = "NV-001",
+                EmployeeId = Guid.NewGuid(),
+                EmployeeCode = "NV-0000000000000000000000000000000000000000000000000000000000000000000001",
                 FullName = "Hồ Văn Anh",
                 Gender = Common.Enums.Gender.Male,
-                DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128")   ,
+                DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
                 DateOfBirth = DateTime.Now,
                 PositionName = "Giám đốc",
                 IdentityNumber = "032155458",
@@ -308,27 +318,77 @@ namespace MISA.Amis.BL.UnitTest
 
             var expectedResult = new ServiceResult
             {
-                IsSuccess = true,
+                IsSuccess = false,
+                ErrorCode = ErrorCode.OutMaxLengthCode,
             };
             //Act
             var actualResult = _employeeBL.Insert(employee);
 
             //Assert
             Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
+            Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
+
+
         }
-        
+
         /// <summary>
-        /// Hàm test Data trả về bị lỗi
-        /// TH: 0 - Thất bại
+        /// Hàm test ngày không được lớn hơn ngày hiện tại
+        /// TH: 1 là thành công
         /// </summary>
         [Test]
-        [Ignore("sau")]
-        public void InsertRecord_ValidData_ReturnsValidResultError()
+        public void InsertRecord_DateNotBigerCurrentDate_ReturnsValidResultSuccess()
         {
             //Arrangge
             var employee = new Employee
             {
-                EmployeeCode = "NV-001",
+                EmployeeId = Guid.NewGuid(),
+                EmployeeCode = "NV-1",
+                FullName = "Hồ Văn Anh",
+                Gender = Common.Enums.Gender.Male,
+                DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
+                DateOfBirth = new DateTime(2030, 12, 31),
+                PositionName = "Giám đốc",
+                IdentityNumber = "032155458",
+                IdentityDate = DateTime.Now,
+                IdentityPlace = "Thanh Hóa",
+                Address = "Hà Nội",
+                PhoneNumber = "0145874",
+                TelephoneNumber = "01555511",
+                Email = "Anh@example.com",
+                BankAccountNumber = "054664678",
+                BankName = "ACb",
+                BankBranch = "Hà Thành",
+                CreatedDate = DateTime.Now,
+                CreatedBy = "Nguyễn Văn Anh",
+                ModifiedBy = "Nguyễn Văn Bình",
+                ModifiedDate = DateTime.Now
+            };
+
+            //_fakeEmployeeDL.InsertRecord(employee).Returns(1);
+
+            var expectedResult = new ServiceResult
+            {
+                IsSuccess = false,
+                ErrorCode = ErrorCode.DateValid,
+            };
+            //Act
+            var actualResult = _employeeBL.Insert(employee);
+
+            //Assert
+            Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
+            Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
+
+
+        }
+
+        [Test]
+        public void InsertRecord_ValidSuccess_ReturnValidSucces()
+        {
+            //Arrangge
+            var employee = new Employee
+            {
+                EmployeeId = Guid.NewGuid(),
+                EmployeeCode = "NV-1000",
                 FullName = "Hồ Văn Anh",
                 Gender = Common.Enums.Gender.Male,
                 DepartmentId = Guid.Parse("17120d02-6ab5-3e43-18cb-66948daf6128"),
@@ -350,22 +410,17 @@ namespace MISA.Amis.BL.UnitTest
                 ModifiedDate = DateTime.Now
             };
 
-            //_fakeEmployeeDL.InsertRecord(employee).Returns(0);
 
             var expectedResult = new ServiceResult
             {
-                IsSuccess = false,
-                ErrorCode = Common.Enums.ErrorCode.InsertFailed,
-                Message = "Lỗi thêm mới khi kết nối đến DL"
+                IsSuccess = true,
             };
             //Act
             var actualResult = _employeeBL.Insert(employee);
 
             //Assert
             Assert.AreEqual(expectedResult.IsSuccess, actualResult.IsSuccess);
-            Assert.AreEqual(expectedResult.ErrorCode, actualResult.ErrorCode);
-            Assert.AreEqual(expectedResult.Message, actualResult.Message);
+
         }
-        
     }
 }

@@ -68,7 +68,6 @@ namespace MISA.Amis.API.Controllers
                 return HandleException(ex);
             }
             //}
-            #endregion
         }
 
         [HttpPost("export")]
@@ -93,5 +92,8 @@ namespace MISA.Amis.API.Controllers
                 return HandleException(ex);
             }
         }
+
+        #endregion
+
     }
 }

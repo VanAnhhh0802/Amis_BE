@@ -287,8 +287,8 @@ namespace MISA.Amis.BL
             //Check ngày Không được lớn hơn ngày hiện tại
             if (employee.DateOfBirth != null && !string.IsNullOrEmpty(employee.DateOfBirth?.ToString()) || employee.IdentityDate != null && !string.IsNullOrEmpty(employee.IdentityDate?.ToString()))
             {
-                var dateOfBirth = (DateTime)employee.DateOfBirth;
-                var identityDate = (DateTime)employee.IdentityDate;
+                var dateOfBirth = (DateTime?)employee.DateOfBirth;
+                var identityDate = (DateTime?)employee.IdentityDate;
                 if (dateOfBirth > DateTime.Now)
                 {
                     return new ServiceResult
