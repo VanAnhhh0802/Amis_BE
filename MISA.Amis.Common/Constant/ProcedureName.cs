@@ -48,6 +48,31 @@ namespace MISA.Amis.Common.Constant
         /// </summary>
         public static string Export = "Proc_{0}_Export";
 
+        /// <summary>
+        /// Proc xóa nhiều
+        /// </summary>
         public static string DeleteMany = "Proc_{0}_DeleteMany";
+
+        /// <summary>
+        /// Proc lấy ra tài khoản con
+        /// </summary>
+        public static string GetAccountChildren = "Proc_{0}_GetChildren";
+
+        /// <summary>
+        /// Lấy ra tất cả tài khoản
+        /// </summary>
+        public static string GetAllAccount = "Proc_{0}_GetAll";
+
+        public static string UpdateAccountAcitve = "Proc_{0}_UpdateActive";
+
+        public static string GetAllObjecct = "Proc_Object_GetAll";
+
+        public static string GetAllEmployee = "Proc_Employee_GetAll";
+
+        public static string InsertDetail = "Proc_PaymentDetail_InsertMany";
+        public static string GetDetailById = "Proc_PaymentDetail_GetByIdMany";
+        public static string GetNewPaymentNumber = "Proc_Payment_GetNewPayment";
+
+
     }
 }

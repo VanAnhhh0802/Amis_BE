@@ -56,5 +56,47 @@ namespace MISA.Amis.Common.Constant
         /// Tên tài khoản ngân hàng
         /// </summary>
         public static string BANK_NAME = "Tên ngân hàng";
+
+
+        /// <summary>
+        /// Ngày hạch toán
+        /// </summary>
+        public static string PAYMENT_DATE = "Ngày hạch toán";
+
+        /// <summary>
+        /// Ngày chứng từ
+        /// </summary>
+        public static string POSTED_DATE = "Ngày chứng từ";
+
+        /// <summary>
+        /// Số chứng từ
+        /// </summary>
+        public static string PAYMENT_NUMBER = "Số chứng từ";
+
+        /// <summary>
+        /// Diễn giải
+        /// </summary>
+        public static string REASON = "Diễn giải";
+
+        /// <summary>
+        /// Số tiền
+        /// </summary>
+        public static string TOTAL_AMOUN = "Số tiền";
+
+        /// <summary>
+        /// Mã đối tượng
+        /// </summary>
+        public static string OJECT_CODE = "Mã đối tượng";
+
+        /// <summary>
+        /// Đơn vị
+        /// </summary>
+        public static string OJECT_NAME = "Tên đối tượng";
+
+        /// <summary>
+        /// Địa chỉ
+        /// </summary>
+        public static string ADDRESS = "Địa chỉ";
+
     }
 }

@@ -31,7 +31,7 @@ namespace MISA.Amis.DL.BaseDL
         /// 500: insert thất bại
         /// </returns>
         /// created by: Văn Anh (8/2/2023)
-        int InsertRecord(T record, Guid newId);
+        Guid InsertRecord(T record, Guid newId);
         /// <summary>
         /// Hàm sửa record
         /// </summary>
@@ -41,7 +41,7 @@ namespace MISA.Amis.DL.BaseDL
         /// -500: sửa thất bại
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        int UpdateRecord(Guid id, T record);
+        Guid UpdateRecord(Guid id, T record);
 
         /// <summary>
         /// Hàm xóa record

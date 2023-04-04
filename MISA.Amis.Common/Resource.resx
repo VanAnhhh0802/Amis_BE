@@ -147,11 +147,17 @@
   <data name="DuplicateEmployeeCode" xml:space="preserve">
     <value>Mã nhân viên tồn tại trong hệ thống vui lòng kiểm tra lại.</value>
   </data>
+  <data name="Duplicate_Account" xml:space="preserve">
+    <value>Mã nhân viên bị trùng</value>
+  </data>
   <data name="EmptyValue" xml:space="preserve">
     <value>Dữ liệu đầu vào không hợp lệ!</value>
   </data>
   <data name="FeMale" xml:space="preserve">
     <value>Nữ</value>
+  </data>
+  <data name="InputValidAccountNumber" xml:space="preserve">
+    <value>Số tài khoản không hợp lệ. Số tài khoản chi tiết phải bắt đầu bằng số của Tài khoản tổng hợp</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Nam</value>
@@ -185,6 +191,9 @@
   </data>
   <data name="OutLengthTelephoneNumber" xml:space="preserve">
     <value>Số điện thoại cố định không quá 50 ký tự</value>
+  </data>
+  <data name="PaymentDateError" xml:space="preserve">
+    <value>Ngày hạch toán phải lớn hơn hoặc bằng Ngày chứng từ.Xin vui lòng kiểm tra lại.</value>
   </data>
   <data name="UpdateNotExit" xml:space="preserve">
     <value>Bản ghi cần sửa không tồn tại</value>

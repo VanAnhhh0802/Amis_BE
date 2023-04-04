@@ -78,5 +78,30 @@ namespace MISA.Amis.DL.EmployeeDL
             }
             return result;
         }
+
+        /// <summary>
+        /// Lấy tất cả đối tượng
+        /// </summary>
+        /// <returns>Danh sách đối tượng</returns>
+        public List<Employee> GetEmployeeAll()
+        {
+            string storedProcedureName = String.Format(ProcedureName.GetAllEmployee);
+
+            var parameters = new DynamicParameters();
+
+            // Chuẩn bị tham số đầu vào cho stored
+            //Khởi tạo kết nốt tới DB
+            List<Employee> result;
+            using (var mySqlConnection = DatabaseConnection.ConnectDatabase())
+            {
+                mySqlConnection.Open();
+                //Gọi vào Db
+                result = mySqlConnection.Query<Employee>(
+                   storedProcedureName,
+                   parameters,
+                   commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
+            return result;
+        }
     }
 }

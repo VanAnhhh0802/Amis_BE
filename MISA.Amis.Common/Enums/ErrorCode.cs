@@ -136,5 +136,10 @@
         /// Mã lỗi của mã nhân viên
         /// </summary>
         EmployeeCodeError = 27,
+
+        /// <summary>
+        /// Mã lỗi đầu vào không đúng định dạng
+        /// </summary>
+        InputValid = 28,
     }
 }

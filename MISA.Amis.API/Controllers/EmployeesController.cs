@@ -12,7 +12,6 @@ using MISA.Amis.BL;
 using MISA.Amis.Common.Entities.DTO;
 using MISA.Amis.DL.EmployeeDL;
 using MISA.Amis.BL.BaseBL;
-using MISA.Amis.BL;
 
 namespace MISA.Amis.API.Controllers
 {
@@ -93,6 +92,22 @@ namespace MISA.Amis.API.Controllers
             }
         }
 
+
+        [HttpGet("GetAll")]
+        public IActionResult GetAll()
+        {
+            try
+            {
+                var allEmployee = _employeeBL.GetEmployeeAll();
+                // Xử lý kết quả trả về
+                return StatusCode(StatusCodes.Status200OK, allEmployee);
+
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
         #endregion
 
     }

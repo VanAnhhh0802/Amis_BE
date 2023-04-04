@@ -56,6 +56,7 @@ namespace MISA.Amis.BL
 
             string newEmployeeCodeNumber = long.Parse(maxEmployeeCodeNumber) + 1 + "";
 
+
             string newEmployeeCode = maxEmployeeCodeString + newEmployeeCodeNumber;
             return newEmployeeCode;
         }
@@ -99,7 +100,7 @@ namespace MISA.Amis.BL
                 var flag = new StyleFlag();
                 //Bật thuộc tính kiểu dáng tương đối
                 flag.All = true;
-                //Áp dụng trong phạm vi
+                //Áp dụng trong phạm vi A1 tới I1 đều đc sử dụng
                 limit.ApplyStyle(style, flag);
 
                 //Hợp nhất 2 hàng
@@ -198,6 +199,16 @@ namespace MISA.Amis.BL
             }
         }
 
+
+        /// <summary>
+        /// Lấy tất cả đối tượng
+        /// </summary>
+        /// <returns>Danh sách đối tượng</returns>
+        public List<Employee> GetEmployeeAll()
+        {
+            return _employeeDL.GetEmployeeAll();
+        }
+
         /// <summary>
         /// Format giới tính để export
         /// </summary>
@@ -233,19 +244,20 @@ namespace MISA.Amis.BL
         /// <param name="employee">đối tượng employee</param>
         /// <returns>đối tượng service result</returns>
         /// Created by: Văn Anh (4/3/2023)
-        protected override ServiceResult ValidateCustom(Employee? employee)
+        protected override ServiceResult ValidateCustom(Employee? employee, Guid id)
         {
             //check mã nhân viên 
             if (employee.EmployeeCode != null && !string.IsNullOrEmpty(employee.EmployeeCode?.ToString()))
             {
                 //Check mã trùng
-                var duplicateCode = CheckDuplicate(employee, (string)employee.EmployeeCode, employee.EmployeeId);
+                var duplicateCode = CheckDuplicate(employee, (string)employee.EmployeeCode, id);
                 if (duplicateCode)
                 {
                     return new ServiceResult
                     {
                         IsSuccess = false,
                         ErrorCode = Common.Enums.ErrorCode.DuplicateCode,
+                        Message = "Mã nhân viên <" + employee.EmployeeCode.ToString() + "> bị trùng"
                     };
                 }
             }
@@ -311,5 +323,6 @@ namespace MISA.Amis.BL
                 IsSuccess = true,
             };
         }
+    
     }
 }

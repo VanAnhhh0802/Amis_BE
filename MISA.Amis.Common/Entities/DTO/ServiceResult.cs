@@ -29,7 +29,8 @@ namespace MISA.Amis.Common.Entities.DTO
         /// </summary>
         public string? Message { get; set; }
         
-        public int numberOfAffectedRows { get; set; }
+        public Guid resultId { get; set; }
 
+        public List<Guid> resultDetail { get; set; }
     }
 }

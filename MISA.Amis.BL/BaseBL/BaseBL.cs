@@ -75,7 +75,7 @@ namespace MISA.Amis.BL.BaseBL
             return new ServiceResult
             {
                 IsSuccess = true,
-                numberOfAffectedRows = resultDL,
+                resultId = resultDL,
             };
         }
 
@@ -113,12 +113,12 @@ namespace MISA.Amis.BL.BaseBL
                 }
 
             }
-            resultValidateCustom = ValidateCustom(record);
+            resultValidateCustom = ValidateCustom(record, id);
 
 
             if (resultValidateCustom.IsSuccess)
             {
-                resultValidateCustom = ValidateCustom(record);
+                resultValidateCustom = ValidateCustom(record, id);
             }
 
             if (!resultValidateCustom.IsSuccess)
@@ -140,7 +140,7 @@ namespace MISA.Amis.BL.BaseBL
         /// </summary>
         /// <param name="record"></param>
         /// <returns></returns>
-        protected virtual ServiceResult ValidateCustom(T? record)
+        protected virtual ServiceResult ValidateCustom(T? record, Guid id)
         {
             return new ServiceResult { };
         }
@@ -154,7 +154,7 @@ namespace MISA.Amis.BL.BaseBL
         /// Số bản ghi bị thay đổi
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        public virtual ServiceResult Update(T record, Guid id)
+        public ServiceResult Update(T record, Guid id)
         {
             //Validate đầu vào
             var validateErrorResults = ValidateRequestData(record, id);
@@ -169,7 +169,7 @@ namespace MISA.Amis.BL.BaseBL
             return new ServiceResult
             {
                 IsSuccess = true,
-                numberOfAffectedRows = resultDL
+                resultId = resultDL,
             };
         }
 
@@ -239,9 +239,9 @@ namespace MISA.Amis.BL.BaseBL
         /// </summary>
         /// <param name="recordCode">record</param>
         /// <returns>true - mã record bị trùng, false - mã record không bị trùng</returns>
-        public bool CheckDuplicate(T record, string employeeCode, Guid id)
+        public bool CheckDuplicate(T record, string recordCode, Guid id)
         {
-            var result = _baseDL.CheckDuplicate(record, employeeCode, id);
+            var result = _baseDL.CheckDuplicate(record, recordCode, id);
             if (result > 0)
             {
                 return true;

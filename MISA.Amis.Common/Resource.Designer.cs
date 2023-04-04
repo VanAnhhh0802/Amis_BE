@@ -142,6 +142,15 @@ namespace MISA.Amis.Common {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã nhân viên bị trùng.
+        /// </summary>
+        public static string Duplicate_Account {
+            get {
+                return ResourceManager.GetString("Duplicate_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mã nhân viên tồn tại trong hệ thống vui lòng kiểm tra lại..
         /// </summary>
         public static string DuplicateEmployeeCode {
@@ -165,6 +174,15 @@ namespace MISA.Amis.Common {
         public static string FeMale {
             get {
                 return ResourceManager.GetString("FeMale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Số tài khoản không hợp lệ. Số tài khoản chi tiết phải bắt đầu bằng số của Tài khoản tổng hợp.
+        /// </summary>
+        public static string InputValidAccountNumber {
+            get {
+                return ResourceManager.GetString("InputValidAccountNumber", resourceCulture);
             }
         }
         
@@ -264,6 +282,15 @@ namespace MISA.Amis.Common {
         public static string OutLengthTelephoneNumber {
             get {
                 return ResourceManager.GetString("OutLengthTelephoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ngày hạch toán phải lớn hơn hoặc bằng Ngày chứng từ.Xin vui lòng kiểm tra lại..
+        /// </summary>
+        public static string PaymentDateError {
+            get {
+                return ResourceManager.GetString("PaymentDateError", resourceCulture);
             }
         }
         

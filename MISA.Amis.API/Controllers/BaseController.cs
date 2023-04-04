@@ -105,7 +105,8 @@ namespace MISA.Amis.API.Controllers
         /// 201: Thêm thành công 
         /// 500: Thất bại
         /// </returns>
-        /// Created By Văn ANh(17/01/2023) 
+        /// Created By Văn ANh(17/01/2023) \
+        /// 
         [HttpPost]
         public IActionResult Insert([FromBody] T record)
         {
@@ -117,7 +118,7 @@ namespace MISA.Amis.API.Controllers
                 {
                     return ValidateFalse(result);
                 }
-                return StatusCode(StatusCodes.Status201Created);
+                return StatusCode(StatusCodes.Status201Created, result.resultId);
             }
             catch (Exception ex)
             {
@@ -146,17 +147,9 @@ namespace MISA.Amis.API.Controllers
                 {
                     return ValidateFalse(result);
                 }
-                if (result.numberOfAffectedRows > 0)
-                {
-                    return StatusCode(StatusCodes.Status200OK, result);
+                else { 
+                    return StatusCode(StatusCodes.Status200OK, result.resultId);
                 }
-                return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
-                {
-                    ErrorCode = Common.Enums.ErrorCode.UpdateNotExit,
-                    DevMsg = Resource.UpdateNotExit,
-                    UserMsg = Resource.UpdateNotExit,
-                    TranceId = HttpContext.TraceIdentifier
-                });
             }
             catch (Exception ex)
             {
@@ -266,7 +259,7 @@ namespace MISA.Amis.API.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest, new ErrorResult
                     {
                         ErrorCode = result.ErrorCode,
-                        UserMsg = Resource.DuplicateEmployeeCode,
+                        UserMsg = result.Message,
                         MoreInfor = result.Data,
                         TranceId = HttpContext.TraceIdentifier
                     });
@@ -274,7 +267,7 @@ namespace MISA.Amis.API.Controllers
                     return StatusCode(StatusCodes.Status400BadRequest, new ErrorResult
                     {
                         ErrorCode = result.ErrorCode,
-                        UserMsg = Resource.UserMsg_OutLengthEmployeeCode,
+                        UserMsg = result.Message,
                         MoreInfor = result.Data,
                         TranceId = HttpContext.TraceIdentifier
                     });
@@ -370,6 +363,14 @@ namespace MISA.Amis.API.Controllers
                     {
                         ErrorCode = result.ErrorCode,
                         UserMsg = Resource.UserMsg_CodeError,
+                        MoreInfor = result.Data,
+                        TranceId = HttpContext.TraceIdentifier
+                    });
+                case Common.Enums.ErrorCode.InputValid:
+                    return StatusCode(StatusCodes.Status400BadRequest, new ErrorResult
+                    {
+                        ErrorCode = result.ErrorCode,
+                        UserMsg = result.Message,
                         MoreInfor = result.Data,
                         TranceId = HttpContext.TraceIdentifier
                     });

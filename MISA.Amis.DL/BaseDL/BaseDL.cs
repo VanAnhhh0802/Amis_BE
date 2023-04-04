@@ -62,7 +62,7 @@ namespace MISA.Amis.DL.BaseDL
                 var totalRecords = result.ReadFirstOrDefault<int>();
 
                 data = new PagingResult<T>()
-                {
+                {                                                                                   
                     totalRecord = totalRecords,
                     totalPage = (totalRecords % pageSize) == 0 ? (totalRecords / pageSize) : (totalRecords / pageSize) + 1,
                     Data = listData,
@@ -80,7 +80,7 @@ namespace MISA.Amis.DL.BaseDL
         /// -500: insert thất bại
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        public int InsertRecord(T record, Guid newId)
+        public Guid InsertRecord(T record, Guid newId)
         {
             string storedProcedureName = String.Format(ProcedureName.Insert, typeof(T).Name);
 
@@ -100,8 +100,13 @@ namespace MISA.Amis.DL.BaseDL
                    parameters,
                    commandType: System.Data.CommandType.StoredProcedure);
             }
+
+            if (numberOfAffectedRows > 0)
+            {
+                return newId;
+            }
             //kết quả trả về
-            return numberOfAffectedRows;
+            return Guid.Empty;
         }
        
         /// <summary>
@@ -146,7 +151,7 @@ namespace MISA.Amis.DL.BaseDL
         /// 500: Thất bại
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        public int UpdateRecord(Guid id, T record)
+        public Guid UpdateRecord(Guid id, T record)
         {
             string storedProcedureName = String.Format(ProcedureName.Update, typeof(T).Name);
 
@@ -167,7 +172,11 @@ namespace MISA.Amis.DL.BaseDL
                    commandType: System.Data.CommandType.StoredProcedure);
             }
             // Xử lý kết quả trả về
-            return numberOfAffectedRows;
+            if (numberOfAffectedRows > 0)
+            {
+                return id;
+            }
+            return Guid.Empty;
         }
 
         /// <summary>

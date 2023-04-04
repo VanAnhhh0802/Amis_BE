@@ -29,5 +29,7 @@ namespace MISA.Amis.BL
         /// <returns>File danh sách nhân viên</returns>
         /// Creatd By: Văn Anh (17/2/2023)
         MemoryStream ExportEmployee(string keyword);
+
+        public List<Employee> GetEmployeeAll();
     }
 }

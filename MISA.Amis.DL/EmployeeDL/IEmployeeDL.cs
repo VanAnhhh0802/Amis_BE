@@ -28,5 +28,7 @@ namespace MISA.Amis.DL.EmployeeDL
         /// <returns>File danh sách nhân viên</returns>
         /// Creatd By: Văn Anh (17/2/2023)
         List<Employee> ExportEmployee(string keyword);
+
+         List<Employee> GetEmployeeAll();
     }
 }
