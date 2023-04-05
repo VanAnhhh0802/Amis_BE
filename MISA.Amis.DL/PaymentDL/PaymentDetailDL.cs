@@ -3,6 +3,7 @@ using MISA.Amis.Common.Constant;
 using MISA.Amis.Common.Entities;
 using MISA.Amis.Common.Entities.MPayment;
 using MISA.Amis.DL.BaseDL;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,30 +86,76 @@ namespace MISA.Amis.DL.PaymentDL
             return Guid.Empty;
         }
 
-        public PaymentDetail GetDetailById(Guid id)
+        /// <summary>
+        /// Lấy ra chi tiết chi phiếu theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<PaymentDetail> GetDetailById(Guid id)
         {
             string storedProcedureName = String.Format(ProcedureName.GetDetailById);
 
-            var properties = typeof(PaymentDetail).GetProperties();
             var parameters = new DynamicParameters();
 
             parameters.Add($"p_PaymentId", id);
             // Chuẩn bị tham số đầu vào cho stored
             //Khởi tạo kết nốt tới DB
-            dynamic result;
+            var result = new List<PaymentDetail>();
             using (var mySqlConnection = DatabaseConnection.ConnectDatabase())
             {
                 mySqlConnection.Open();
                 //Gọi vào Db
-                result = mySqlConnection.Execute(
+                result = mySqlConnection.Query<PaymentDetail>(
                    storedProcedureName,
                    parameters,
-                   commandType: System.Data.CommandType.StoredProcedure);
+                   commandType: System.Data.CommandType.StoredProcedure).ToList();
             }
 
             
             //kết quả trả về
             return result;
+        }
+
+        /// <summary>
+        /// Update nhiều payment detail
+        /// </summary>
+        /// <param name="paymentDetails">Mảng các payment detail</param>
+        /// <returns></returns>
+        public int UpdatePaymentDetails(IEnumerable<PaymentDetail> paymentDetails)
+        {
+            using (var mySqlConnection = new MySqlConnection(DatabaseContext.ConnectionString))
+            {
+                mySqlConnection.Open();
+                using (var transaction = mySqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        int rowsEffected = 0;
+                        foreach (var paymentDetail in paymentDetails)
+                        {
+                            var storedName = "Proc_PaymentDetail_Update";
+                            var parameters = new DynamicParameters();
+                            parameters.Add("PaymentDetailId", Guid.NewGuid());
+                            parameters.Add("ModifiedBy", "Hồ Văn Anh");
+                            var listProps = typeof(PaymentDetail).GetProperties();
+                            foreach (var prop in listProps)
+                            {
+                                parameters.Add($"p_{prop.Name}", prop.GetValue(paymentDetail));
+                            }
+                            var numberOfAffectedRow = mySqlConnection.Execute(storedName, parameters, commandType: System.Data.CommandType.StoredProcedure, transaction: transaction);
+                            rowsEffected++;
+                        }
+                        if (rowsEffected != paymentDetails.Count()) transaction.Rollback();
+                        transaction.Commit();
+                        return rowsEffected;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw new Exception(ex.Message);
+                    }
+                }
+            }
         }
     }
 }

@@ -66,6 +66,21 @@ namespace MISA.Amis.BL.AccountBL
         }
 
         /// <summary>
+        /// Phân trang theo danh sách record
+        /// </summary>
+        /// <param name="pageSize">Số lượng bản ghi trên 1 trang thỏa mãn điều kiện</param>
+        /// <param name="pageNumber">Trang hiện tại</param>
+        /// <param name="keyword">Tìm theo mã, tên, số điện thoại </param>
+        /// <param name="departmentId">id của phòng ban</param>
+        /// <param name="positionId">id của Chức vụ</param>
+        /// <returns>Danh sách record và số lượng bản ghi theo điều kiện</returns>
+        /// Created by: VĂn Anh (6/2/2023)
+        public PagingResult<Account> Filter(string keyword, int pageSize, int pageNumber)
+        {
+            return _accountDL.Filter(keyword,  pageSize, pageNumber);
+        }
+
+        /// <summary>
         /// Hàm validate riêng cho class account
         /// </summary>
         /// <param name="account">đối tượng account</param>

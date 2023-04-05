@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using MISA.Amis.BL.PaymentDetailBL;
 using MISA.Amis.Common.Entities.DTO;
+using MISA.Amis.Common.Enums;
+using MISA.Amis.Common;
+using MISA.Amis.PaymentBL;
 
 namespace MISA.Amis.BL.PaymentBL
 {
@@ -42,7 +45,7 @@ namespace MISA.Amis.BL.PaymentBL
         public ServiceResult InsertMany(PaymentDetail[] details)
         {
 
-             List<Guid> resultDL = new List<Guid>();
+            List<Guid> resultDL = new List<Guid>();
             //Guid resultDL;
             foreach (var detail in details)
             {
@@ -65,25 +68,31 @@ namespace MISA.Amis.BL.PaymentBL
         /// Số bản ghi bị thay đổi
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
-        public List<PaymentDetail> GetDetailByiId(Guid[] ids)
+        public List<PaymentDetail> GetDetailByiId(Guid id)
         {
-
-             List<PaymentDetail> resultDL = new List<PaymentDetail>();
-            foreach (var id in ids)
-            {
-                resultDL.Add(_paymentDetailDL.GetDetailById(id));
-            }
-
-            // Xử lý kết quả trả về
-
-            return resultDL;
+            return _paymentDetailDL.GetDetailById(id);
         }
 
+        /// <summary>
+        /// Lẩy ra tất cả phiếu chi
+        /// </summary>
+        /// <returns></returns>
         public List<PaymentDetail> GetAlLPaymentDetail()
         {
             return _paymentDetailDL.GetAlLPaymentDetail();
         }
-        
+
+        /// <summary>
+        /// Update nhiều payment detail
+        /// </summary>
+        /// <param name="paymentDetails">Mảng các payment detail</param>
+        /// <returns></returns>
+        public int UpdatePaymentDetails(IEnumerable<PaymentDetail> paymentDetails)
+        {
+            var result = _paymentDetailDL.UpdatePaymentDetails(paymentDetails);
+            return result;
+        }
+
         
     }
 }

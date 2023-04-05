@@ -96,5 +96,37 @@ namespace MISA.Amis.API.Controllers
                 return HandleException(ex);
             }
         }
+
+        /// <summary>
+        /// API lấy record theo bộ lọc và phân trang
+        /// </summary>
+        /// <param name="keyword">Từ khóa</param>
+        /// <param name="departmentId">ID của đơn vị</param>
+        /// <param name="pageSize">Số bản ghi muốn lấy</param>
+        /// <param name="pageNumber">Vị trí bản ghi hiện tại</param>
+        /// <returns>Đối tượng IActionResult bao gồm:
+        /// -Tổng số bản ghi thỏa mãn điều kiện
+        /// -Danh sách nhân viên trên 1 trang
+        /// -Số trang hiền thị thỏa mãn điều kiện
+        /// </returns>
+        /// Created By: Văn Anh (17/1/2023)
+        [HttpGet("filterAccount")]
+        public IActionResult GetRecordsFilter(
+            [FromQuery] string? keyword,
+            [FromQuery] int pageSize,
+            [FromQuery] int pageNumber
+            )
+        {
+            try
+            {
+                var data = _accountBL.Filter(keyword, pageSize, pageNumber);
+                // Xử lý kết quả trả về
+                return StatusCode(StatusCodes.Status200OK, data);
+            }
+            catch (Exception ex)
+            {
+                return HandleException(ex);
+            }
+        }
     }
 }

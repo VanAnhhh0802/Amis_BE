@@ -1,4 +1,5 @@
 ﻿using MISA.Amis.Common.Entities;
+using MISA.Amis.Common.Entities.DTO;
 using MISA.Amis.DL.BaseDL;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,14 @@ namespace MISA.Amis.DL.AccontDL
         /// <param name="isAcive">Trạng thái tài khoản cần cập nhật</param>
         /// <returns>Trạng thái của tài khoản sau khi cập nhật</returns>
         public int UpdateActive(string ids, bool isAcive);
+
+        /// <summary>
+        /// Tìm kiếm tài khoản
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        public PagingResult<Account> Filter(string? keyword, int pageSize, int pageNumber);
     } 
 }

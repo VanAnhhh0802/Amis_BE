@@ -141,5 +141,10 @@
         /// Mã lỗi đầu vào không đúng định dạng
         /// </summary>
         InputValid = 28,
+        
+        /// <summary>
+        /// ĐỘ dài tối đa cả trường amout payment detail
+        /// </summary>
+        //LengAmount = 10000000000000,
     }
 }

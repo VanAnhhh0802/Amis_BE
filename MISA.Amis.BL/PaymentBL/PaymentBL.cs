@@ -195,6 +195,12 @@ namespace MISA.Amis.PaymentBL
             }
         }
     
+
+        /// <summary>
+        /// Hàm format tiền dùng cho xuất excel
+        /// </summary>
+        /// <param name="money"></param>
+        /// <returns></returns>
         public static string FormatMoney(decimal? money)
         {
             try
@@ -209,6 +215,13 @@ namespace MISA.Amis.PaymentBL
             }
         }
 
+       
+        /// <summary>
+        /// Hàm validate riêng cho phiếu chi
+        /// </summary>
+        /// <param name="payment"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         protected override ServiceResult ValidateCustom(Payment? payment, Guid id)
         {
             //check mã nhân viên 

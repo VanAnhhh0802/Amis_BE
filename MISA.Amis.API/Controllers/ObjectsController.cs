@@ -25,6 +25,11 @@ namespace MISA.Amis.API.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Lấy ra tất cả object
+        /// </summary>
+        /// <returns></returns>
+        /// Crteated By: Văn Anh (1/4/2023)
         [HttpGet("GetAll")]
         public IActionResult GetAll() 
         {

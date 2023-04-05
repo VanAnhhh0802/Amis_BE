@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using MISA.Amis.Common.Constant;
 using MISA.Amis.Common.Entities;
+using MISA.Amis.Common.Entities.DTO;
 using MISA.Amis.DL.BaseDL;
 using System;
 using System.Collections.Generic;
@@ -96,7 +97,47 @@ namespace MISA.Amis.DL.AccontDL
             // Xử lý kết quả trả về
             return numberOfAffectedRows;
         }
-    
-       
+
+        /// <summary>
+        /// Phân trang theo danh sách nhân viên
+        /// </summary>
+        /// <param name="pageSize">Số lượng bản ghi trên 1 trang thỏa mãn điều kiện</param>
+        /// <param name="pageNumber">Trang hiện tại</param>
+        /// <param name="employeeFilter">Tìm theo mã, tên, số điện thoại </param>
+        /// <param name="departmentId">id của phòng ban</param>
+        /// <returns>Danh sách nhân viên và số lượng bản ghi</returns>
+        /// Created by: VĂn Anh (6/2/2023)
+        public PagingResult<Account> Filter(string? keyword,int pageSize, int pageNumber)
+        {
+            string storedProcedureName = String.Format(ProcedureName.Filter);
+
+            var parameters = new DynamicParameters();
+            parameters.Add("p_PageNumber", pageNumber);
+            parameters.Add("p_PageSize", pageSize);
+            parameters.Add("p_keyword", keyword);
+            // Chuẩn bị tham số đầu vào cho stored
+            GridReader result;  
+            var data = new PagingResult<Account>();
+            //Khởi tạo kết nốt tới DB
+            using (var mySqlConnection = DatabaseConnection.ConnectDatabase())
+            {
+                mySqlConnection.Open();
+                //Gọi vào Db
+                result = mySqlConnection.QueryMultiple(
+                  storedProcedureName, parameters, commandType: System.Data.CommandType.StoredProcedure);
+
+                var listData = result.Read<Account>().ToList();
+
+                var totalRecords = result.ReadFirstOrDefault<int>();
+
+                data = new PagingResult<Account>()
+                {
+                    totalRecord = totalRecords,
+                    totalPage = (totalRecords % pageSize) == 0 ? (totalRecords / pageSize) : (totalRecords / pageSize) + 1,
+                    Data = listData,
+                };
+            }
+            return data;
+        }
     }
 }

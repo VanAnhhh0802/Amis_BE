@@ -17,11 +17,26 @@ namespace MISA.Amis.DL.PaymentDL
         /// <returns>Danh sách Chi phiếu </returns>
         public List<PaymentDetail> GetAlLPaymentDetail();
 
+        /// <summary>
+        /// Thêm nhiều chứng từ detail
+        /// </summary>
+        /// <param name="record"></param>
+        /// <returns></returns>
         public Guid InsertDetailMany(PaymentDetail record);
 
 
-        public PaymentDetail GetDetailById(Guid id );
+        /// <summary>
+        /// Lấy chi tiết chứng từ theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<PaymentDetail> GetDetailById(Guid id );
 
-
+        /// <summary>
+        /// Cập nhật chứng từ theo id
+        /// </summary>
+        /// <param name="paymentDetails"></param>
+        /// <returns></returns>
+        public int UpdatePaymentDetails(IEnumerable<PaymentDetail> paymentDetails);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MISA.Amis.BL;
+using MISA.Amis.Common;
 using MISA.Amis.Common.Entities.DTO;
 using MISA.Amis.Common.Entities.MPayment;
 using MISA.Amis.PaymentBL;
@@ -23,6 +24,11 @@ namespace MISA.Amis.API.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// Xuất excel danh sách chứng từ
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         [HttpPost("export")]
         public IActionResult Export([FromBody] string keyword)
         {
@@ -80,5 +86,23 @@ namespace MISA.Amis.API.Controllers
             }
             //}
         }
+        /// <summary>
+        /// Hàm trả về mã lỗi
+        /// </summary>
+        /// <param name="ex"></param>
+        /// <returns></returns>
+        protected IActionResult HandleException(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return StatusCode(StatusCodes.Status500InternalServerError, new ErrorResult
+            {
+                ErrorCode = Common.Enums.ErrorCode.Exception,
+                DevMsg = Resource.DevMsg_Exception,
+                UserMsg = Resource.UserMsg_Exception,
+                MoreInfor = ex.Message,
+                TranceId = HttpContext.TraceIdentifier
+            });
+        }
+
     }
 }

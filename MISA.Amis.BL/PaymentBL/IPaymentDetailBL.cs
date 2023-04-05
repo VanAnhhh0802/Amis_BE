@@ -23,7 +23,22 @@ namespace MISA.Amis.BL.PaymentDetailBL
         /// </returns>
         /// Created by: VĂn Anh (6/2/2023)
         public ServiceResult InsertMany(PaymentDetail[] details);
-        public List<PaymentDetail> GetDetailByiId(Guid[] ids);
+
+        /// <summary>
+        /// Lấy chứng từ theo id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// Created By: Văn Anh (1/4/2023)
+        public List<PaymentDetail> GetDetailByiId(Guid id);
+
+        /// <summary>
+        /// Cập nhật chứng từ detail
+        /// </summary>
+        /// <param name="paymentDetails"></param>
+        /// <returns></returns>
+        /// Created By: Văn Anh (1/4/2023)
+        public int UpdatePaymentDetails(IEnumerable<PaymentDetail> paymentDetails);
 
     }
 }

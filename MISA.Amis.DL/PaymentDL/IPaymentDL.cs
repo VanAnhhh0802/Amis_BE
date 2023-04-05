@@ -18,6 +18,10 @@ namespace MISA.Amis.DL.PaymentDL
         /// Creatd By: Văn Anh (17/2/2023)
         public List<Payment> ExportPayment(string keyword);
 
+        /// <summary>
+        /// Lấy ra mã chứng từ mới
+        /// </summary>
+        /// <returns></returns>
         public string GetNewPaymentNumber();
     }
 }
